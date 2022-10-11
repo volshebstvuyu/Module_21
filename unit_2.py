@@ -1,6 +1,6 @@
 from datetime import datetime
 from decorators import do_twice
-
+import functools
 def sum (a,b):
     print(a + b)
 # sum(5,5)
@@ -36,11 +36,11 @@ def test_twice(str):
     print("Этот вызов возвращает строку {0}".format(str))
     return "Done"
 test_twice("single")
-print(test_twice.__name__)
+# print(test_twice.__name__)
 
 #
-# decorated_value = test_twice("single")
-# print(decorated_value)
+decorated_value = test_twice("single")
+print(decorated_value)
 
 
 @do_twice
@@ -58,12 +58,12 @@ test_twice_2_params("1", "2")
 test_twice("single")
 
 def workig_hours(func):
-    def wrepper():
+    def wrapper():
         if 9 <= datetime.now().hour < 23:
             func()
         else:
             pass
-    return wrepper
+    return wrapper
 def writing_tests():
     print("я пишу тесты на python")
 writing_tests = workig_hours(writing_tests)
